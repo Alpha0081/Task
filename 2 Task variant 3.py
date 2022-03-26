@@ -43,9 +43,9 @@ for j, __lambda in enumerate(_lambda):
         a = spherical_jn(n, k * r) / h(n, k * r)
         b = (k * r * spherical_jn(n - 1, k * r) - n * spherical_jn(n, k * r)) / (k * r * h(n - 1, k * r) - n * h(n, k * r))
         RCS_old = RCS
-        RCS += __lambda ** 2 / np.pi * abs((-1) ** n * (n + 0.5) * (b - a)) ** 2
+        RCS += (-1) ** n * (n + 0.5) * (b - a)
         n += 1
-    RCS_array[j] = RCS
+    RCS_array[j] = __lambda ** 2 / np.pi * abs(RCS) ** 2
 
 plt.plot(f / 1e9, RCS_array)
 plt.grid()
