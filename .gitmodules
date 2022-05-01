@@ -1,0 +1,3 @@
+[submodule "fdtd"]
+	path = fdtd
+	url = git@github.com:Alpha0081/fdtd.git

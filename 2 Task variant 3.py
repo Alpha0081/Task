@@ -7,12 +7,15 @@ import numpy as np
 from scipy.special import spherical_jn, spherical_yn
 import matplotlib.pyplot as plt
 
-#url = "https://jenyay.net/uploads/Student/Modelling/task_02.xml"
+#  url = "https://jenyay.net/uploads/Student/Modelling/task_02.xml"
 
-#response = requests.get(url)
+#  response = requests.get(url)
 
 #with open("data.xml", "wb") as f:
 #    f.write(response.content)
+#  for line in response.content:
+    #  print(line)
+
 
 tree = ET.parse('data.xml')
 root = tree.getroot()
@@ -22,15 +25,16 @@ eps = 1e-12
 
 
 for i, child in enumerate(root):
-    if i == 2:
+    if i == 1:
         D = float(child.attrib["D"])
+        print(D)
         fmin = float(child.attrib["fmin"])
         fmax = float(child.attrib["fmax"])
 
 
 h = lambda n, z: spherical_jn(n, z) + 1j * spherical_yn(n, z)
 
-f = np.arange(fmin, fmax + 1, 1e6)
+f = np.linspace(fmin, fmax, 1000)
 _lambda = c / f
 r = D / 2
 RCS_array = np.zeros(f.size)
