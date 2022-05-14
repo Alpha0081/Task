@@ -6,7 +6,7 @@ from fdtd.layer import Layer
 from fdtd.boundary import ABCFirstLeft, ABCFirstRight
 from fdtd.source import SourceModulatedGaussian
 import numpy as np
-import matplotlib.pyplot as plt
+import pyqtgraph as pg
 
 if __name__ == "__main__":
     fdtd = FDTD(1.5, 5e-3, 2e-8, 1)
@@ -20,7 +20,7 @@ if __name__ == "__main__":
     probe = fdtd.get_probe()
     frequency = np.fft.fftfreq(int(2e-8 // fdtd.dt))
     spectr = np.fft.fft(probe[0].E)
-    plt.vlines(frequency / fdtd.dt, 0, abs(spectr) / max(abs(spectr)))
-    plt.scatter(frequency / fdtd.dt, abs(spectr) / max(abs(spectr)), s=4)
-    plt.grid()
-    plt.show()
+    p = pg.plot()
+    p.plot(frequency / fdtd.dt, abs(spectr) / max(abs(spectr)))
+    p.showGrid(x=True,y=True)
+    pg.exec()
